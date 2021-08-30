@@ -23,15 +23,13 @@ data:
   output_format: 'reg_xyz' # 'reg_xyz' (default) | 'accdoa'
 model:
   encoder:
-    name: 'PannResNet22L17'
+    name: 'PannResNet22'
     n_input_channels: 7  # salsa, melspeciv, linspeciv: 7, melspecgcc, linspecgcc: 10
   decoder:
-    name: 'MapDecoderTanh'
-    decoder_type: 'gru'   # 'gru', 'transformer', 'lstm'
-    freq_pool: 'avg'
-    gru_size: 256
-    n_azis: 72
-    n_eles: 19
+    name: 'SeldDecoder'
+    decoder_type: 'gru'   # 'gru'| 'bigru'| 'lstm'| bilstm'| 'transformer',
+    decoder_size: 256
+    freq_pool: 'avg'  # 'avg'| 'max'| 'avg_max'
 training:
   train_batch_size: 32
   val_batch_size: 32
@@ -54,9 +52,7 @@ training:
       - 0.9
   loss_weight:
     - 0.3
-    - 0.0
     - 0.7
-  sed_loss_type: 'bce'
   max_epochs: 50  # epoch counting from [0 to n-1]
   val_interval: 1
 sed_threshold: 0.3

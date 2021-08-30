@@ -263,6 +263,41 @@ class ConvBlock5x5(nn.Module):
         return x
 
 
+class PositionalEncoding(nn.Module):
+    def __init__(self, pos_len, d_model=512, pe_type='t', dropout=0.0):
+        """ Positional encoding using sin and cos
+        Args:
+            pos_len: positional length
+            d_model: number of feature maps
+            pe_type: 't' | 'f' , time domain, frequency domain
+            dropout: dropout probability
+        """
+        super().__init__()
+
+        self.pe_type = pe_type
+        pe = torch.zeros(pos_len, d_model)
+        pos = torch.arange(0, pos_len).float().unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-np.log(10000.0) / d_model))
+        pe[:, 0::2] = 0.1 * torch.sin(pos * div_term)
+        pe[:, 1::2] = 0.1 * torch.cos(pos * div_term)
+        pe = pe.unsqueeze(0).transpose(1, 2)  # (N, C, T)
+        self.register_buffer('pe', pe)
+        self.dropout = nn.Dropout(p=dropout)
+
+    def forward(self, x):
+        # x is (N, C, T, F) or (N, C, T) or (N, C, F)
+        if x.ndim == 4:
+            if self.pe_type == 't':
+                pe = self.pe.unsqueeze(3)
+                x += pe[:, :, :x.shape[2]]
+            elif self.pe_type == 'f':
+                pe = self.pe.unsqueeze(2)
+                x += pe[:, :, :, :x.shape[3]]
+        elif x.ndim == 3:
+            x += self.pe[:, :, :x.shape[2]]
+        return self.dropout(x)
+
+
 def _resnet_conv3x3(in_planes, out_planes):
     # 3x3 convolution with padding
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=1,

@@ -1,0 +1,70 @@
+# MAP config
+name: 'map'
+feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/tfmap/mic/24000fs_512nfft_300nhop_5cond_4000fmaxdoa'
+feature_type: 'salsa' # 'salsa' | 'melspeciv' | 'linspeciv' | 'melspecgcc' | 'linspecgcc'
+gt_meta_root_dir: '/data/seld_dcase2021/task3'
+split_meta_dir: '/home/tho_nguyen/Documents/work/dcase2021/task3/seld_dcase2021/dataset/meta/dcase2021/original'
+seed: 2021
+mode: 'crossval'  # 'crossval' | 'eval'
+data:
+  fs: 24000
+  n_fft: 512
+  hop_len: 300
+  n_mels: 200
+  audio_format: 'mic'  # 'foa' | 'mic'
+  label_rate: 10  # Label rate per second
+  train_chunk_len_s: 4
+  train_chunk_hop_len_s: 0.5
+  test_chunk_len_s: 60.0
+  test_chunk_hop_len_s: 60.1 # set test_chunk_hop_len_s > test_chunk_len_s if we want to evaluate the whole clip at once
+  n_classes: 12  # 12 for 2021 SELD dataset, 14 for 2020 SELD dataset
+  train_fraction: 1.0
+  val_fraction: 1.0
+  output_format: 'reg_xyz' # 'reg_xyz' (default) | 'accdoa'
+model:
+  encoder:
+    name: 'PannResNet22L17'
+    n_input_channels: 7  # tfmap: 8, tfmapspecmeigen: 7, tfmapspec1eigen, tfmapspecm 4, tfmapeigen: 3
+    p_dropout: 0.0
+    pretrained: false
+    pretrained_path: '/home/tho_nguyen/Documents/work/dcase2021/task3/seld_dcase2021/pretrained_models/ResNet22_mAP=0.430.pth'
+    unfreeze_epoch: 0  # -1: freezeing, 0: no freezing, > 0: freeze until unfreeze_epoch
+  decoder:
+    name: 'MapDecoderTanh'
+    decoder_type: 'gru'   # 'gru', 'transformer', 'lstm'
+    freq_pool: 'avg'
+    gru_size: 256
+    n_azis: 72
+    n_eles: 19
+training:
+  train_batch_size: 32
+  val_batch_size: 32
+  optimizer: 'adam'
+  lr_scheduler:
+    milestones:
+      - 0.0
+      - 0.1
+      - 0.7
+      - 1.0
+    lrs:
+      - 3.e-4
+      - 3.e-4
+      - 3.e-4
+      - 1.e-4
+    moms:  # momentums
+      - 0.9
+      - 0.9
+      - 0.9
+      - 0.9
+  loss_weight:
+    - 0.3
+    - 0.0
+    - 0.7
+  sed_loss_type: 'bce'
+  max_epochs: 50  # epoch counting from [0 to n-1]
+  val_interval: 1
+sed_threshold: 0.3
+doa_threshold: 20
+eval_version: '2021'  # '2020', '2021' not yet add this to smn_models
+
+

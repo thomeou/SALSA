@@ -22,7 +22,7 @@ class Database:
                  feature_root_dir: str = '/data/seld_dcase2021/features/tfmap/foa/'
                                          '24000fs_512nfft_300nhop_5cond_9000fmaxdoa_Falseonset_Falsemask_Truedrr',
                  gt_meta_root_dir: str = '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3',
-                 audio_format: str = 'foa', n_classes: int = 12, n_max_events: int = 3, fs: int = 24000,
+                 audio_format: str = 'foa', n_classes: int = 12, fs: int = 24000,
                  n_fft: int = 1024, hop_len: int = 300, label_rate: float = 10, train_chunk_len_s: float = 8.0,
                  train_chunk_hop_len_s: float = 0.5, test_chunk_len_s: float = 4.0, test_chunk_hop_len_s: float = 2.0,
                  output_format: str = 'reg_xyz'):
@@ -47,7 +47,6 @@ class Database:
         self.gt_meta_root_dir = gt_meta_root_dir
         self.audio_format = audio_format
         self.n_classes = n_classes
-        self.n_max_events = n_max_events
         self.fs = fs
         self.n_fft = n_fft
         self.hop_len = hop_len

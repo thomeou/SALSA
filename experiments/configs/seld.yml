@@ -24,11 +24,7 @@ data:
 model:
   encoder:
     name: 'PannResNet22L17'
-    n_input_channels: 7  # tfmap: 8, tfmapspecmeigen: 7, tfmapspec1eigen, tfmapspecm 4, tfmapeigen: 3
-    p_dropout: 0.0
-    pretrained: false
-    pretrained_path: '/home/tho_nguyen/Documents/work/dcase2021/task3/seld_dcase2021/pretrained_models/ResNet22_mAP=0.430.pth'
-    unfreeze_epoch: 0  # -1: freezeing, 0: no freezing, > 0: freeze until unfreeze_epoch
+    n_input_channels: 7  # salsa, melspeciv, linspeciv: 7, melspecgcc, linspecgcc: 10
   decoder:
     name: 'MapDecoderTanh'
     decoder_type: 'gru'   # 'gru', 'transformer', 'lstm'

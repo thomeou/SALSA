@@ -4,9 +4,8 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 
 from dataset.dataloader import SeldDataset
-# from utilities.transforms import ComposeTransformNp, CompositeCutout, RandomShiftUpDownNp, \
-#     ComposeSmnTransformNp, ComposeMapTransform, TfmapRandomSwapChannelFoa, TfmapRandomSwapChannelMic, \
-#     GccRandomSwapChannelMic
+from utilities.transforms import ComposeTransformNp, CompositeCutout, RandomShiftUpDownNp, \
+    ComposeMapTransform, TfmapRandomSwapChannelFoa, TfmapRandomSwapChannelMic, GccRandomSwapChannelMic
 
 
 class SeldDataModule(pl.LightningDataModule):
@@ -73,16 +72,14 @@ class SeldDataModule(pl.LightningDataModule):
                 raise NotImplementedError('aug not implemented for {} {}'.format(audio_format, self.feature_type))
         elif audio_format == 'mic':
             if self.feature_type == 'salsa':
-                self.train_joint_transform = None
-                self.train_transform = None
-                # self.train_joint_transform = ComposeMapTransform([
-                #     TfmapRandomSwapChannelMic(n_classes=feature_db.n_classes),
-                # ])
-                # self.train_transform = ComposeTransformNp([
-                #     RandomShiftUpDownNp(freq_shift_range=10),  # apply across all channels
-                #     CompositeCutout(image_aspect_ratio=self.feature_db.train_chunk_len / 200,
-                #                     n_zero_channels=4),  # n_zero_channels: these last channels will be replaced with 0
-                # ])
+                self.train_joint_transform = ComposeMapTransform([
+                    TfmapRandomSwapChannelMic(n_classes=feature_db.n_classes),
+                ])
+                self.train_transform = ComposeTransformNp([
+                    RandomShiftUpDownNp(freq_shift_range=10),  # apply across all channels
+                    CompositeCutout(image_aspect_ratio=self.feature_db.train_chunk_len / 200,
+                                    n_zero_channels=4),  # n_zero_channels: these last channels will be replaced with 0
+                ])
             elif self.feature_type == 'linspecgcc':
                 self.train_joint_transform = ComposeMapTransform([
                     GccRandomSwapChannelMic(n_classes=feature_db.n_classes),

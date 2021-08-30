@@ -15,7 +15,7 @@ import re
 import pytorch_lightning as pl
 import torch
 
-from experiments.evaluate_seld import evaluate_seld
+from experiments.evaluate import evaluate_seld
 from utilities.builder_utils import build_database, build_datamodule, build_model, build_task
 from utilities.experiments_utils import manage_experiments
 from utilities.learning_utils import MyLoggingCallback
@@ -121,7 +121,8 @@ def inference(exp_config: str = './configs/seld.yml',
     trainer.test(model=model, test_dataloaders=datamodule.test_dataloader())
 
     # Evaluate
-    evaluate_seld(output_dir=submission_dir, data_version='2021', metric_version='2021', split=inference_split)
+    evaluate_seld(output_dir=submission_dir, data_version='2021', metric_version='2021',
+                  is_eval_split=inference_split=='eval')
 
 
 def inference_all_splits(exp_config: str = './configs/seld.yml',

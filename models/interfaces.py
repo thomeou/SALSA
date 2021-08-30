@@ -188,7 +188,7 @@ class BaseModel(pl.LightningModule):
         event_frame_gt = target_dict['event_frame_gt'].detach().cpu().numpy()
         doa_frame_pred = pred_dict['doa_frame_output'].detach().cpu().numpy()
         doa_frame_gt = target_dict['doa_frame_gt'].detach().cpu().numpy()
-        if self.doa_output_format == 'accdoa':
+        if self.output_format == 'accdoa':
             event_frame_pred = self.get_sed_from_accdoa_output(doa_frame_pred)
         # Combine chunk if necessary
         if event_frame_pred.shape[0] == 1:

@@ -264,7 +264,7 @@ def compute_scaler(feature_dir: str, audio_format: str) -> None:
     print('Elapsed time: {:.3f} s'.format(timer() - start_time))
 
 
-def extract_features(data_config: str = 'configs/tnsse_salsa_feature_config.yml',
+def extract_features(data_config: str = 'configs/tnsse2021_salsa_feature_config.yml',
                      cond_num: float = 5,  # 5, 0
                      n_hopframes: int = 3,   # do not change
                      is_tracking: bool = True,  # Better to do tracking

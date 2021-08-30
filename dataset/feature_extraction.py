@@ -17,8 +17,6 @@ from sklearn import preprocessing
 from timeit import default_timer as timer
 from tqdm import tqdm
 
-from utilities.doa import tracknoise
-
 
 class FeatureExtractor:
     """

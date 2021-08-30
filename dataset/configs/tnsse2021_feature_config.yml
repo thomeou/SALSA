@@ -1,0 +1,11 @@
+data_dir: '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3'
+feature_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features'
+data:
+  format: 'foa'
+  fs: 24000
+  n_fft: 1024
+  win_len: 1024
+  hop_len: 300  # 240 for 10ms, 300 for 12.5ms, 480 for 20 ms
+  fmin: 50
+  fmax: 12000
+  n_mels: 128

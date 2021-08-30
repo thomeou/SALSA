@@ -146,14 +146,8 @@ class Database:
         logger.info('Number of files in split {} is {}'.format(split, len(split_filenames)))
         # Get chunk len and chunk hop len
         if stage == 'fit':
-            if split in ['train', 'val', 'dev']:
-                self.chunk_len = self.train_chunk_len
-                self.chunk_hop_len = self.train_chunk_hop_len
-            elif split in ['test', 'eval']:
-                self.chunk_len = self.test_chunk_len
-                self.chunk_hop_len = self.test_chunk_hop_len
-            else:
-                raise NotImplementedError('chunk len is not assigned for split {}'.format(split))
+            self.chunk_len = self.train_chunk_len
+            self.chunk_hop_len = self.train_chunk_hop_len
         elif stage == 'inference':
             self.chunk_len = self.test_chunk_len
             self.chunk_hop_len = self.test_chunk_hop_len

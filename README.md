@@ -40,7 +40,7 @@ features outperformed other state-of-the-art features. Specifically, the use of 
 the F1 score and localization recall by 6% each, compared to the multichannel log-mel spectrograms with intensity vectors. 
 For the MIC format, using SALSA features increased F1 score and localization recall by 16% and 7%, respectively, 
 compared to using multichannel log-mel spectrograms with generalized cross-correlation spectra. 
-![SELD performance](figures/seld_performances_with_data_augmentation.png)
+![SELD performance](figures/SELD_performances_with_data_augmentation.png)
 
 Our ensemble model trained on SALSA features ranked second in the team category of the SELD task in the 
 [2021 DCASE Challenge](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).

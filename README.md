@@ -53,7 +53,9 @@ based on ResNet22 for [audio tagging](https://github.com/qiuqiangkong/audioset_t
 and fully connected (FC) layers. The network can be adapted for different input features by setting the number
 of input channels in the first convolutional layer to that of the input features.
 
-![SELD network architecture](figures/seld_network_architecture.png)
+<p align="center">
+        <img src="figures/seld_network_architecture.png" title="Network architecture for CRNN" width="40%">
+</p>
 
 ## Visualization of SELD output
 

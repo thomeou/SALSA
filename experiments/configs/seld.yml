@@ -17,7 +17,7 @@ data:
   train_chunk_hop_len_s: 0.5
   test_chunk_len_s: 60.0
   test_chunk_hop_len_s: 60.1 # set test_chunk_hop_len_s > test_chunk_len_s if we want to evaluate the whole clip at once
-  n_classes: 12  # 12 for 2021 SELD dataset, 14 for 2020 SELD dataset
+  n_classes: 12  # 12 for 2021 TNSSE dataset, 14 for 2020 TNSSE dataset
   train_fraction: 1.0
   val_fraction: 1.0
   output_format: 'reg_xyz' # 'reg_xyz' (default) | 'accdoa'

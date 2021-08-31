@@ -55,7 +55,6 @@ of input channels in the first convolutional layer to that of the input features
 
 <p align="center">
         <img src="figures/seld_network_architecture.png" title="Network architecture for CRNN" width="40%">
-        <em>Network architecture for SELD.</em>
 </p>
 
 ## Visualization of SELD output

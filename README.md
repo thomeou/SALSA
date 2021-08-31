@@ -20,18 +20,34 @@ Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones;
 
 todo
 
+## Network architecture
+
+todo
+
 ## Prepare dataset and environment
 
 This code is tested on Ubuntu 18.04 with Python 3.7, CUDA 11.0 and Pytorch 1.7
 
-1, Install the following dependencies by `pip install -r requirements.txt`.
+1. Install the following dependencies by `pip install -r requirements.txt`. Or manually install these modules:
+    * numpy
+    * scipy
+    * pandas
+    * scikit-learn
+    * h5py
+    * librosa
+    * tqdm
+    * pytorch 1.7
+    * pytorch-lightning      
+    * tensorboardx
+    * pyyaml
+    * einops
 
-2, Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). 
+2. Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). 
 This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](https://zenodo.org/record/4064792). 
 
-3, Extract everything into the same folder. 
+3. Extract everything into the same folder. 
 
-4, Data file structure should look like this:
+4. Data file structure should look like this:
 
 ```
 ./
@@ -51,15 +67,32 @@ This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](ht
 
 ## Feature extraction
 
-todo
+Our code support the following features:  
 
-## Training
+| Name        | Format   | Component     | Number of channels |
+| :---        | :----:   | :---          |  :----:            |
+| melspeciv   | FOA      | multichannel log-mel spectrograms  + intensity vector    | 7 |
+| linspeciv   | FOA      | multichannel log-linear spectrograms  + intensity vector    | 7 |
+| melspecgcc  | MIC      | multichannel log-mel spectrograms  + GCC-PHAT    | 10 |
+| linspecgcc  | MIC      | multichannel log-linear spectrograms  + GCC-PHAT   | 10 |
+| **SALSA**   | FOA      | multichannel log-linear spectrograms  + eigenvector-based intensity vector (EIV)    | 7 |
+| **SALSA**   | MIC      | multichannel log-linear spectrograms  + eigenvector-based phase vector (EPV)    | 7 |
 
-todo
+Note: the number of channels are calculated based on four-channel inputs.
 
-## Evaluate our pretrained model
+To extract **SALSA** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_feature_config.yml` in 
+`dataset\configs\` folder. Then run `make salsa`
 
-todo
+To extract *linspeciv*, *melspeciv*, *linspecgcc*, *melspecgcc* feature, 
+edit directories for data and feature accordingly in `tnsse_2021_feature_config.yml` in 
+`dataset\configs\` folder. Then run `make feature`
+
+## Training and inference
+
+To train SELD model with SALSA feature, edit the *feature_root_dir* and *gt_meta_root_dir* in the experiment config 
+`experiments\configs\seld.yml`. Then run `make train`. 
+
+To do inference, run `make inference`. To evaluate output, edit the `Makefile` accordingly and run `make evaluate`.
 
 ## Citation
 Please consider citing our paper if you find this code useful for your research. Thank you!!!

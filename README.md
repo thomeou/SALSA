@@ -16,7 +16,7 @@ Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones;
 
 [[**ArXiv paper**]](https://arxiv.org/xxx)
 
-## Introduction to Sound event localization and detection
+## Introduction to sound event localization and detection
 
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 
 sound event detection (SED) and direction-of-arrival estimation (DOAE) by jointly recognizing the sound classes, 
@@ -48,11 +48,19 @@ Our ensemble model trained on SALSA features ranked second in the team category 
 
 ## Network architecture
 
-todo
+We use a convolutional recurrent neural network (CRNN) in this code. The network consists of a CNN that is 
+based on ResNet22 for [audio tagging](https://github.com/qiuqiangkong/audioset_tagging_cnn), a two-layer BiGRU,
+and fully connected (FC) layers. The network can be adapted for different input features by setting the number
+of input channels in the first convolutional layer to that of the input features.
+
+![SELD network architecture](figures/seld_network_architecture.png)
 
 ## Visualization of SELD output
 
-todo
+Visualization of ground truth and predicted azimuth for test clip `fold6_room2_mix041` of the TAU-NIGENS Spatial Sound 
+Events 2021 dataset. Legend lists the ground truth events in chronological order. Sound classes are color-coded.
+
+![Output_visualization](figures/azimuth_gt_prediction.png)
 
 ## Prepare dataset and environment
 

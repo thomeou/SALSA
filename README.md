@@ -16,11 +16,40 @@ Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones;
 
 [[**ArXiv paper**]](https://arxiv.org/xxx)
 
+## Introduction to Sound event localization and detection
+
+Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 
+sound event detection (SED) and direction-of-arrival estimation (DOAE) by jointly recognizing the sound classes, 
+and estimating the directions of arrival (DOA), the onsets, and the offsets of detected sound events.
+While sound event detection mainly relies on time-frequency patterns to distinguish different sound classes,
+direction-of-arrival estimation uses amplitude and/or phase differences between microphones to estimate source directions.
+As a result, it is often difficult to jointly optimize these two subtasks.
+
 ## What is SALSA?
+
+We propose a novel feature called Spatial Cue-Augmented Log-Spectrogram (SALSA) with exact time-frequency mapping 
+between the signal power and the source directional cues, which is crucial for resolving overlapping sound sources. 
+The SALSA feature consists of multichannel log-linear spectrograms stacked along with the normalized principal 
+eigenvector of the spatial covariance matrix at each corresponding time-frequency bin. Depending on the types of microphone array,
+the principal eigenvector can be normalized differently to extract amplitude and/or phase differences between the 
+microphones. As a result, SALSA features are applicable for different microphone array formats such as first-order 
+ambisonics (FOA) and multichannel microphone array (MIC). 
+
+Experimental results on the TAU-NIGENS Spatial Sound Events 2021 dataset with directional interferences showed that SALSA 
+features outperformed other state-of-the-art features. Specifically, the use of SALSA features in the FOA format increased 
+the F1 score and localization recall by 6% each, compared to the multichannel log-mel spectrograms with intensity vectors. 
+For the MIC format, using SALSA features increased F1 score and localization recall by 16% and 7%, respectively, 
+compared to using multichannel log-mel spectrograms with generalized cross-correlation spectra. 
+![SELD performance](figures/seld_performances_with_data_augmentation.png)
+
+Our ensemble model trained on SALSA features ranked second in the team category of the SELD task in the 
+[2021 DCASE Challenge](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).
+
+## Network architecture
 
 todo
 
-## Network architecture
+## Visualization of SELD output
 
 todo
 

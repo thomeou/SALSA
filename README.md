@@ -35,7 +35,7 @@ the principal eigenvector can be normalized differently to extract amplitude and
 microphones. As a result, SALSA features are applicable for different microphone array formats such as first-order 
 ambisonics (FOA) and multichannel microphone array (MIC). 
 
-Experimental results on the TAU-NIGENS Spatial Sound Events 2021 dataset with directional interferences showed that SALSA 
+Experimental results on the TAU-NIGENS Spatial Sound Events (TNSSE) 2021 dataset with directional interferences showed that SALSA 
 features outperformed other state-of-the-art features. Specifically, the use of SALSA features in the FOA format increased 
 the F1 score and localization recall by 6% each, compared to the multichannel log-mel spectrograms with intensity vectors. 
 For the MIC format, using SALSA features increased F1 score and localization recall by 16% and 7%, respectively, 
@@ -55,6 +55,7 @@ of input channels in the first convolutional layer to that of the input features
 
 <p align="center">
         <img src="figures/seld_network_architecture.png" title="Network architecture for CRNN" width="40%">
+        <em>Network architecture for SELD.</em>
 </p>
 
 ## Visualization of SELD output
@@ -62,7 +63,19 @@ of input channels in the first convolutional layer to that of the input features
 Visualization of ground truth and predicted azimuth for test clip `fold6_room2_mix041` of the TAU-NIGENS Spatial Sound 
 Events 2021 dataset. Legend lists the ground truth events in chronological order. Sound classes are color-coded.
 
-![Output_visualization](figures/azimuth_gt_prediction.png)
+![SELD output_visualization](figures/azimuth_gt_prediction.png "Visualization of SELD output")
+
+## Comparison with state-of-the-art SELD systems
+
+Simple CRNN models trained on SALSA features have shown to achieve similar to or even better SELD 
+performance than many complex state-of-the-art systems on the 2020 and 2021 TNSSE datasets. We listed the performances 
+of our models trained with the proposed SALSA features and other state-of-the-art SELD system in the following tables. 
+For more results, please refer to the paper listed above. 
+
+<p align="center">
+        <img src="figures/SELD_performance_on_test_split_of_TNSSE2021_dataset.png" 
+         title="SELD performance on test split of TNSSE2021 dataset" width="60%">
+</p>
 
 ## Prepare dataset and environment
 

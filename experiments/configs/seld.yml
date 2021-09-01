@@ -10,10 +10,10 @@ data:
   fs: 24000
   n_fft: 512
   hop_len: 300
-  n_mels: 200
+  n_mels: 200  # can be n_freqs, can be n_mels
   audio_format: 'mic'  # 'foa' | 'mic'
   label_rate: 10  # Label rate per second
-  train_chunk_len_s: 4
+  train_chunk_len_s: 8
   train_chunk_hop_len_s: 0.5
   test_chunk_len_s: 60.0
   test_chunk_hop_len_s: 60.1 # set test_chunk_hop_len_s > test_chunk_len_s if we want to evaluate the whole clip at once
@@ -57,6 +57,6 @@ training:
   val_interval: 1
 sed_threshold: 0.3
 doa_threshold: 20
-eval_version: '2021'  # '2020', '2021' not yet add this to smn_models
+eval_version: '2021'  # '2020'| '2021'
 
 

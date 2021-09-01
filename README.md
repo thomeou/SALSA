@@ -17,7 +17,6 @@ Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones;
 [[**ArXiv paper**]](https://arxiv.org/xxx)
 
 ## Introduction to sound event localization and detection
-
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 
 sound event detection (SED) and direction-of-arrival estimation (DOAE) by jointly recognizing the sound classes, 
 and estimating the directions of arrival (DOA), the onsets, and the offsets of detected sound events.

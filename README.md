@@ -1,4 +1,4 @@
-# SALSA: Spatial Cue-AugmentedLog-Spectrogram Features for Polyphonic Sound Event Localization and Detection
+# SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection
 
 <p align="center">
         <img src="figures/foa_salsa_16s_tight_with_text.png" title="SALSA feature for first-order ambisonics microphone (FOA)" width="48%"> 

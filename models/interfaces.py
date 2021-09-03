@@ -276,17 +276,34 @@ class BaseModel(pl.LightningModule):
             loss, sed_loss, doa_loss = self.compute_classwise_clareg_loss(target_dict=target_dict,
                                                                           pred_dict=pred_dict)
         elif self.output_format == 'accdoa':
-            doa_loss = self.compute_classwise_accdoa_loss(target_dict=target_dict, pred_dict=pred_dict)
+            sed_loss, doa_loss = self.compute_classwise_accdoa_loss(target_dict=target_dict, pred_dict=pred_dict)
             sed_loss = 0.0
-            loss = doa_loss
+            loss = sed_loss + doa_loss
 
         return loss, sed_loss, doa_loss
 
-    @staticmethod
-    def compute_classwise_accdoa_loss(target_dict, pred_dict):
-        doa_loss = F.mse_loss(input=pred_dict['doa_frame_output'], target=target_dict['doa_frame_gt'],
-                              reduction='mean')
-        return doa_loss
+    def compute_classwise_accdoa_loss(self, target_dict, pred_dict):
+        """
+        target_dict['event_frame_gt']: (batch_size, n_timesteps, n_classes)
+        target_dict['doa_frame_gt']: (batch_size, n_timesteps, 3 * n_classes)
+        pred_dict['doa_frame_output']: (batch_size, n_timesteps, 3 * n_classes)
+        """
+        n_active = torch.sum(target_dict['event_frame_gt'])
+        n_nonactive = target_dict['event_frame_gt'].shape[0] * target_dict['event_frame_gt'].shape[
+            1] * self.n_classes - n_active
+
+        xyz_loss = F.mse_loss(input=pred_dict['doa_frame_output'], target=target_dict['doa_frame_gt'],
+                              reduction='none')
+        x = xyz_loss[:, :, :self.n_classes]
+        y = xyz_loss[:, :, self.n_classes: 2 * self.n_classes]
+        z = xyz_loss[:, :, 2 * self.n_classes:]
+        doa_loss = torch.sum((x + y + z) * target_dict['event_frame_gt']) / n_active
+
+        sed = torch.sqrt(x ** 2 + y ** 2 + z ** 2)
+        sed_loss = torch.sum(
+            (sed - target_dict['event_frame_gt']) ** 2 * (1 - target_dict['event_frame_gt'])) / n_nonactive
+
+        return sed_loss, doa_loss
 
     def compute_classwise_clareg_loss(self, target_dict, pred_dict):
         # Event frame loss
@@ -335,7 +352,7 @@ class BaseModel(pl.LightningModule):
         if loss_type == 'MAE':
             reg_loss = torch.sum(torch.abs(input - target) * mask) / normalize_value
         elif loss_type == 'MSE':
-            reg_loss = torch.sqrt(torch.sum((input - target) ** 2 * mask) / normalize_value)
+            reg_loss = torch.sum((input - target) ** 2 * mask) / normalize_value
         else:
             raise ValueError('Unknown reg loss type: {}'.format(loss_type))
 

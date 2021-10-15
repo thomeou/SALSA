@@ -11,7 +11,7 @@ data:
   n_fft: 512
   hop_len: 300
   n_mels: 200  # can be n_freqs, can be n_mels
-  audio_format: 'mic'  # 'foa' | 'mic'
+  audio_format: 'foa'  # 'foa' | 'mic'
   label_rate: 10  # Label rate per second
   train_chunk_len_s: 8
   train_chunk_hop_len_s: 0.5

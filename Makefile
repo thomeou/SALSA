@@ -18,9 +18,9 @@ salsa:
 
 # Training and inference
 CONFIG_PATH=./experiments/configs/
-CONFIG_NAME=seld_test.yml
+CONFIG_NAME=seld.yml
 OUTPUT=./outputs
-EXP_SUFFIX=
+EXP_SUFFIX=_test   # the experiment name = CONFIG_NAME + EXP_SUFFIX
 RESUME=False
 GPU_NUM=0
 

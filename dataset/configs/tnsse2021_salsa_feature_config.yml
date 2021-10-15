@@ -2,7 +2,7 @@
 data_dir: '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3'
 feature_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features'
 data:
-  format: 'mic' # 'foa' | 'mic'
+  format: 'foa' # 'foa' | 'mic'
   fs: 24000
   n_fft: 512
   win_len: 512

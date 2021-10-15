@@ -288,20 +288,17 @@ class BaseModel(pl.LightningModule):
         target_dict['doa_frame_gt']: (batch_size, n_timesteps, 3 * n_classes)
         pred_dict['doa_frame_output']: (batch_size, n_timesteps, 3 * n_classes)
         """
-        n_active = torch.sum(target_dict['event_frame_gt'])
-        n_nonactive = target_dict['event_frame_gt'].shape[0] * target_dict['event_frame_gt'].shape[
-            1] * self.n_classes - n_active
+        N = target_dict['event_frame_gt'].shape[0] * target_dict['event_frame_gt'].shape[1]
 
         xyz_loss = F.mse_loss(input=pred_dict['doa_frame_output'], target=target_dict['doa_frame_gt'],
                               reduction='none')
         x = xyz_loss[:, :, :self.n_classes]
-        y = xyz_loss[:, :, self.n_classes: 2 * self.n_classes]
-        z = xyz_loss[:, :, 2 * self.n_classes:]
-        doa_loss = torch.sum((x + y + z) * target_dict['event_frame_gt']) / n_active
+        y = xyz_loss[:, :, self.n_classes: 2*self.n_classes]
+        z = xyz_loss[:, :, 2*self.n_classes:]
+        doa_loss = torch.sum((x + y + z) * target_dict['event_frame_gt']) / N
 
-        sed = torch.sqrt(x ** 2 + y ** 2 + z ** 2)
-        sed_loss = torch.sum(
-            (sed - target_dict['event_frame_gt']) ** 2 * (1 - target_dict['event_frame_gt'])) / n_nonactive
+        sed = torch.sqrt(x**2 + y**2 + z**2)
+        sed_loss = torch.sum((sed - target_dict['event_frame_gt']) ** 2 * (1-target_dict['event_frame_gt'])) / N
 
         return sed_loss, doa_loss
 

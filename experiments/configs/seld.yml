@@ -1,9 +1,9 @@
 # MAP config
 name: 'map'
-feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/tfmap/mic/24000fs_512nfft_300nhop_5cond_4000fmaxdoa'
+feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/tfmap/foa/24000fs_512nfft_300nhop_5cond_4000fmaxdoa'
 feature_type: 'salsa' # 'salsa' | 'melspeciv' | 'linspeciv' | 'melspecgcc' | 'linspecgcc'
 gt_meta_root_dir: '/data/seld_dcase2021/task3'
-split_meta_dir: '/home/tho_nguyen/Documents/work/dcase2021/task3/seld_dcase2021/dataset/meta/dcase2021/original'
+split_meta_dir: './dataset/meta/dcase2021/original'
 seed: 2021
 mode: 'crossval'  # 'crossval' | 'eval'
 data:

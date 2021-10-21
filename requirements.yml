@@ -23,10 +23,10 @@ dependencies:
   - brotlipy=0.7.0=py37hb5d75c8_1001
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.17.1=h36c2ea0_0
-  - ca-certificates=2020.12.5=ha878542_0
+  - ca-certificates=2021.5.30=ha878542_0
   - cachetools=4.1.1=py_0
   - captum=0.3.0=0
-  - certifi=2020.12.5=py37h89c1867_1
+  - certifi=2021.5.30=py37h89c1867_0
   - cffi=1.14.4=py37h261ae71_0
   - chardet=3.0.4=py37he5f6b98_1008
   - click=7.1.2=pyh9f0ad1d_0
@@ -37,6 +37,7 @@ dependencies:
   - dbus=1.13.18=hb2f20db_0
   - decorator=4.4.2=py_0
   - defusedxml=0.6.0=py_0
+  - easydict=1.9=py_0
   - einops=0.3.0=py_0
   - entrypoints=0.3=py37_0
   - expat=2.2.10=he6710b0_2
@@ -223,6 +224,7 @@ dependencies:
     - efficientnet-pytorch==0.7.0
     - imageio==2.9.0
     - imgaug==0.4.0
+    - munch==2.5.0
     - networkx==2.5
     - opencv-python==4.4.0.46
     - opencv-python-headless==4.4.0.46
@@ -234,6 +236,7 @@ dependencies:
     - shapely==1.7.1
     - style==1.1.0
     - tifffile==2020.12.4
+    - timm==0.4.12
     - torchsummary==1.5.1
     - update==0.0.1
     - youtube-dl==2020.12.7

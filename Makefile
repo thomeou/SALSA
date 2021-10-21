@@ -19,10 +19,10 @@ salsa:
 # Training and inference
 CONFIG_PATH=./experiments/configs/
 CONFIG_NAME=seld.yml
-OUTPUT=./outputs
+OUTPUT=./outputs   # Directory to save output
 EXP_SUFFIX=_test   # the experiment name = CONFIG_NAME + EXP_SUFFIX
 RESUME=False
-GPU_NUM=0
+GPU_NUM=0  # Set to -1 if there is not GPU
 
 .phony: train
 train:
@@ -34,7 +34,7 @@ train-joint:
 
 
 # Evaluate
-OUTPUT_DIR=/outputs/crossval/mic/salsa/seld_test/outputs/submissions/original/mic_test
+OUTPUT_DIR=./outputs/crossval/foa/salsa/seld_test/outputs/submissions/original/foa_test
 GT_ROOT_DIR=/data/dcase2021/task3/
 IS_EVAL_SPLIT=False
 

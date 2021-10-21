@@ -4,12 +4,10 @@ This modules consists utility functions to organize folders, create logger for e
 import logging
 import os
 import shutil
-import random
 from datetime import datetime
 
-import numpy as np
-import torch
 import yaml
+from munch import munchify, Munch
 from tqdm import tqdm
 
 
@@ -30,7 +28,7 @@ def manage_experiments(exp_config: str = 'configs/exp1.yml',
         except yaml.YAMLError as exc:
             print(exc)
     # Convert dictionary to object
-    cfg = dict2obj(cfg_dict)
+    cfg = munchify(cfg_dict)
 
     # Create experiment folder
     exp_name = os.path.splitext(os.path.basename(exp_config))[0] + exp_suffix
@@ -50,41 +48,6 @@ def manage_experiments(exp_config: str = 'configs/exp1.yml',
     return cfg
 
 
-class DummyClass:
-    """
-    Dummy class for entry of config object.
-    """
-    pass
-
-
-def dict2obj(d):
-    """
-    Convert nested dictionary to object.
-    Copied from https://www.geeksforgeeks.org/convert-nested-python-dictionary-to-object/
-    :param d: Dictionary.
-    :return: object.
-    """
-    # checking whether object d is a
-    # instance of class list
-    if isinstance(d, list):
-        d = [dict2obj(x) for x in d]
-
-        # if d is not a instance of dict then
-    # directly object is returned
-    if not isinstance(d, dict):
-        return d
-
-        # declaring a class
-
-    # constructor of the class passed to obj
-    obj = DummyClass()
-
-    for k in d:
-        obj.__dict__[k] = dict2obj(d[k])
-
-    return obj
-
-
 def create_empty_folder(folder_name) -> None:
     shutil.rmtree(folder_name, ignore_errors=True)
     os.makedirs(folder_name, exist_ok=True)
@@ -99,7 +62,7 @@ def create_exp_folders(cfg, exp_group_dir: str = '', exp_name: str = '', empty: 
     :param empty: If true, delete all previous data in experiment folder.
     """
     # 1. Experiment directory
-    cfg.dir = DummyClass()
+    cfg.dir = Munch()
     cfg.dir.exp_dir = os.path.join(exp_group_dir, cfg.mode, cfg.data.audio_format, cfg.feature_type, exp_name)
     if empty:
         create_empty_folder(cfg.dir.exp_dir)
@@ -119,27 +82,22 @@ def create_exp_folders(cfg, exp_group_dir: str = '', exp_name: str = '', empty: 
     os.makedirs(cfg.dir.tb_dir, exist_ok=True)
 
     # 5. model directory
-    cfg.dir.model = DummyClass()
+    cfg.dir.model = Munch()
     # 5.1 model checkpoint
     cfg.dir.model.checkpoint = os.path.join(cfg.dir.exp_dir, 'models', 'checkpoint')
     os.makedirs(cfg.dir.model.checkpoint, exist_ok=True)
     # 5.2 best model
     cfg.dir.model.best = os.path.join(cfg.dir.exp_dir, 'models', 'best')
     os.makedirs(cfg.dir.model.best, exist_ok=True)
-    # # 5.3 save all epochs
-    # cfg.dir.model.epoch = os.path.join(cfg.dir.exp_dir, 'models', 'epoch')
-    # os.makedirs(cfg.dir.model.epoch, exist_ok=True)
 
     # 6. output directory
-    cfg.dir.output_dir = DummyClass()
+    cfg.dir.output_dir = Munch()
     # 6.1 submission directory
     cfg.dir.output_dir.submission = os.path.join(cfg.dir.exp_dir, 'outputs', 'submissions')
     os.makedirs(cfg.dir.output_dir.submission, exist_ok=True)
     # 6.2 prediction directory
     cfg.dir.output_dir.prediction = os.path.join(cfg.dir.exp_dir, 'outputs', 'predictions')
     os.makedirs(cfg.dir.output_dir.prediction, exist_ok=True)
-
-    # 7. temporatory output directory to save output during training for inspection
 
 
 class TqdmLoggingHandler(logging.Handler):

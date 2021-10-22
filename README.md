@@ -151,7 +151,7 @@ To do inference, run `make inference`. To evaluate output, edit the `Makefile` a
 We participated in [DCASE2021 Sound Event Localization and Detection Challenge](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).
 Our model ensemble ranked 2nd in the team ranking category. The models in the ensemble were trained on a variant of SALSA 
 for FOA format. This variant has an additional channel for direct-to-reverberant ratio (DRR). For more information, please 
-check out our technical [report](https://arxiv.org/abs/2106.15190). Ablation study on the TAU-NIGENS Spatial Sound 
+check out our [technical report](https://arxiv.org/abs/2106.15190). Ablation study on the TAU-NIGENS Spatial Sound 
 Events 2021 dataset shows that adding DRR channel does not improve the SELD performance. 
 
 We applied three data augmentation techniques, namely channel swapping (CS), frequency shifting (FS), and random cutout (RC) 

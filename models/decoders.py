@@ -6,7 +6,6 @@ import logging
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from einops import rearrange, reduce
 
 from models.model_utils import init_layer, init_gru, PositionalEncoding
 
@@ -26,7 +25,8 @@ class SeldDecoder(nn.Module):
 
         logger = logging.getLogger('lightning')
         logger.info('Map decoder type: {}'.format(self.decoder_type))
-        assert self.decoder_type in ['gru', 'lstm', 'transformer'], 'Invalid decoder type {}'.format(self.decoder_type)
+        assert self.decoder_type in ['gru', 'bigru', 'lstm', 'bilstm', 'transformer'], \
+            'Invalid decoder type {}'.format(self.decoder_type)
 
         if self.decoder_type == 'gru':
             self.gru_input_size = n_output_channels

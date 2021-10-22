@@ -11,7 +11,7 @@ from typing import Tuple
 import torch.nn as nn
 
 from models.interfaces import BaseModel
-from models.model_utils import interpolate_tensor, freeze_named_layers, unfreeze_named_layers
+from models.model_utils import interpolate_tensor
 
 
 class SeldModel(BaseModel):
@@ -72,8 +72,7 @@ class SeldModel(BaseModel):
         self.log('trl', loss, prog_bar=True, logger=True)
         self.log('trsl', sed_loss, prog_bar=True, logger=True)
         self.log('trdl', doa_loss, prog_bar=True, logger=True)
-        training_step_outputs = {'loss': loss, 'event_frame_logit': pred_dict['event_frame_logit'],
-                                 'event_frame_gt': target_dict['event_frame_gt']}
+        training_step_outputs = {'loss': loss}
         return training_step_outputs
 
     def training_epoch_end(self, training_step_outputs):

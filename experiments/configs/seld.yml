@@ -27,11 +27,11 @@ model:
     n_input_channels: 7  # salsa, melspeciv, linspeciv: 7, melspecgcc, linspecgcc: 10
   decoder:
     name: 'SeldDecoder'
-    decoder_type: 'gru'   # 'gru'| 'bigru'| 'lstm'| bilstm'| 'transformer',
+    decoder_type: 'bigru'   # 'gru'| 'bigru'| 'lstm'| bilstm'| 'transformer',
     decoder_size: 256
     freq_pool: 'avg'  # 'avg'| 'max'| 'avg_max'
 training:
-  train_batch_size: 32  # Reduce batch size if GPU out of memory
+  train_batch_size: 32  # Reduce batch size if GPU is out of memory
   val_batch_size: 32
   optimizer: 'adam'
   lr_scheduler:

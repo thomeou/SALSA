@@ -91,7 +91,6 @@ This code is tested on Ubuntu 18.04 with Python 3.7, CUDA 11.0 and Pytorch 1.7
     * pytorch-lightning      
     * tensorboardx
     * pyyaml
-    * einops
     * munch
 
 2. Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). 

@@ -14,7 +14,7 @@ SALSA: Spatial Cue-AugmentedLog-Spectrogram Features for Polyphonic Sound Event 
 Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones; Woon-Seng Gan. 
 </pre>
 
-[[**ArXiv paper**]](https://arxiv.org/xxx)
+[[**ArXiv paper**]](https://arxiv.org/abs/2110.00275)
 
 ## Introduction to sound event localization and detection
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 
@@ -43,7 +43,7 @@ compared to using multichannel log-mel spectrograms with generalized cross-corre
 ![SELD performance](figures/SELD_performances_with_data_augmenation.png)
 
 Our ensemble model trained on SALSA features ranked second in the team category of the SELD task in the 
-[2021 DCASE Challenge](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).
+[2021 DCASE SELD Challenge](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).
 
 ## Network architecture
 
@@ -145,14 +145,27 @@ To train SELD model with SALSA feature, edit the *feature_root_dir* and *gt_meta
 
 To do inference, run `make inference`. To evaluate output, edit the `Makefile` accordingly and run `make evaluate`.
 
+## DCASE2021 Sound Event Localization and Detection Challenge
+
+We participated in [[DCASE2021 Sound Event Localization and Detection Challenge]](http://dcase.community/challenge2021/task-sound-event-localization-and-detection-results).
+Our model ensemble ranked 2nd in the team ranking category. The models in the ensemble were trained on a variant of SALSA 
+for FOA format. This variant has an additional channel for direct-to-reverberant ratio (DRR). For more information, please 
+check out our technical [[report]](https://arxiv.org/abs/2106.15190). Ablation study on the TAU-NIGENS Spatial Sound 
+Events 2021 dataset shows that adding DRR channel does not improve the SELD performance. 
+
+We applied three data augmentation techniques, namely channel swapping (CS), frequency shifting (FS), and random cutout (RC) 
+while training models for the DCASE challenge. However, later ablation study shows that for FOA format of the TAU-NIGENS Spatial Sound 
+Events 2021 dataset, combination of only CS and FS is better than combination of CS, FS and RC.
+
+![SALSA_DRR](figures/SALSA_and_SALSA_DRR.png "SALSA vs SALSA_DRR")
+
 ## Citation
 Please consider citing our paper if you find this code useful for your research. Thank you!!!
 ```
-@InProceedings{tho2021salsa,
-author = {Nguyen, Thi Ngoc Tho and Watcharasupat, Karn N. and Nguyen, Ngoc Khanh and Jones, Douglas L. and Gan, Woon-Seng},
-title = {SALSA: Spatial Cue-AugmentedLog-Spectrogram Features for Polyphonic Sound Event Localization and Detection},
-booktitle = {xxx},
-month = {xxx},
-year = {2021}
+@article{nguyen2021salsa,
+  title={SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection},
+  author={Nguyen, Thi Ngoc Tho and Watcharasupat, Karn N and Nguyen, Ngoc Khanh and Jones, Douglas L and Gan, Woon-Seng},
+  journal={arXiv preprint arXiv:2110.00275},
+  year={2021}
 }
 ```

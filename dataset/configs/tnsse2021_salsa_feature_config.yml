@@ -8,4 +8,4 @@ data:
   win_len: 512
   hop_len: 300  # 300 for 12.5ms for n_fft = 512; 150 for n_fft = 256
   fmin_doa: 50
-  fmax_doa: 4000  # 'foa': 9000; 'mic': 4000
+  fmax_doa: 9000  # 'foa': 9000; 'mic': 4000

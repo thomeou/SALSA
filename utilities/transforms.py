@@ -18,10 +18,7 @@ train_transform = ComposeTransformNp([
 # perform data augmentation
 X = train_transform(X)  # X size: 1 x n_frames x n_mels
 """
-import librosa
 import numpy as np
-import torch
-from typing import List
 
 
 class ComposeTransformNp:
@@ -413,9 +410,8 @@ class TfmapRandomSwapChannelFoa(MapDataAugmentBase):
         m = np.random.randint(2, size=(4,))
         # change input feature
         if m[0] == 1:  # random swap x, y
-            if n_input_channels == 8:
-                x_new[1] = x[3]
-                x_new[3] = x[1]
+            x_new[1] = x[3]
+            x_new[3] = x[1]
             x_new[-3] = x[-1]
             x_new[-1] = x[-3]
         if m[1] == 1:  # negate x
@@ -482,7 +478,7 @@ class TfmapRandomSwapChannelMic(MapDataAugmentBase):
             M1 M2 M3 M4 p12 p13 p14: 7 channels
         """
         n_input_channels = x.shape[0]
-        assert n_input_channels == 7 , 'invalid input channel: {}'.format(n_input_channels)
+        assert n_input_channels == 7, 'invalid input channel: {}'.format(n_input_channels)
         x_new = x.copy()
         y_doa_new = y_doa.copy()
         # random method
@@ -556,7 +552,7 @@ class GccRandomSwapChannelMic(MapDataAugmentBase):
                               np.flip(ele[:, :n_eles//2 + 1], axis=1)), axis=1)
         return ele
 
-    def apply(self, x: np.ndarray, y_sed: np.ndarray, y_doa: np.ndarray, y_nevent: np.ndarray):
+    def apply(self, x: np.ndarray, y_sed: np.ndarray, y_doa: np.ndarray):
         """
         :param x < np.ndarray (n_channels, n_time_steps, n_features)>
         :param y_nevent: <np.ndarray (n_time_steps, )>

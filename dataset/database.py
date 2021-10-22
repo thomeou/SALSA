@@ -20,7 +20,7 @@ class Database:
     """
     def __init__(self,
                  feature_root_dir: str = '/data/seld_dcase2021/features/tfmap/foa/'
-                                         '24000fs_512nfft_300nhop_5cond_9000fmaxdoa_Falseonset_Falsemask_Truedrr',
+                                         '24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
                  gt_meta_root_dir: str = '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3',
                  audio_format: str = 'foa', n_classes: int = 12, fs: int = 24000,
                  n_fft: int = 1024, hop_len: int = 300, label_rate: float = 10, train_chunk_len_s: float = 8.0,

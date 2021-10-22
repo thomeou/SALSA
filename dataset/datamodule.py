@@ -78,7 +78,7 @@ class SeldDataModule(pl.LightningDataModule):
                 self.train_transform = ComposeTransformNp([
                     RandomShiftUpDownNp(freq_shift_range=10),  # apply across all channels
                     CompositeCutout(image_aspect_ratio=self.feature_db.train_chunk_len / 200,
-                                    n_zero_channels=4),  # n_zero_channels: these last channels will be replaced with 0
+                                    n_zero_channels=3),  # n_zero_channels: these last channels will be replaced with 0
                 ])
             elif self.feature_type == 'linspecgcc':
                 self.train_joint_transform = ComposeMapTransform([

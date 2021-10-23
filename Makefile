@@ -29,15 +29,15 @@ train:
 	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/train.py --exp_config="${CONFIG_PATH}${CONFIG_NAME}" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX) --resume=$(RESUME)
 
 .phony: inference
-train-joint:
-	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/inference_all_splits.py --exp_config="${CONFIG_PATH}${CONFIG_NAME}" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX)
+inference:
+	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/inference.py --exp_config="${CONFIG_PATH}${CONFIG_NAME}" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX)
 
 
 # Evaluate
 OUTPUT_DIR=./outputs/crossval/foa/salsa/seld_test/outputs/submissions/original/foa_test
-GT_ROOT_DIR=/data/dcase2021/task3/
+GT_ROOT_DIR=/data/seld_dcase2021/task3
 IS_EVAL_SPLIT=False
 
 .phony: evaluate
 evaluate:
-	PYTHONPATH=$(shell pwd) python experiments/evaluate_seld.py  --output_dir=$(OUTPUT_DIR) --gt_meta_root_dir=$(GT_ROOT_DIR) --is_eval_split=$(IS_EVAL_SPLIT)
+	PYTHONPATH=$(shell pwd) python experiments/evaluate.py  --output_dir=$(OUTPUT_DIR) --gt_meta_root_dir=$(GT_ROOT_DIR) --is_eval_split=$(IS_EVAL_SPLIT)

@@ -129,7 +129,7 @@ def inference_all_splits(exp_config: str = './configs/seld.yml',
                          exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
                          exp_suffix: str = '_test',
                          epoch: int = None,
-                         ckpt_type: str = 'best',  # use checkpoint for eval
+                         ckpt_type: str = 'best',  # 'best' | 'checkpoint' (automatic select best model in 'best' or 'checkpoint')
                          submission_tag: str = '',
                          ):
     """

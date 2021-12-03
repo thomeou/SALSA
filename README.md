@@ -18,6 +18,10 @@ Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones;
 
 [[**ArXiv paper**]](https://arxiv.org/abs/2110.00275)
 
+**Update**
+
+SALSA-Lite feature has been added to the repo.
+
 ## Introduction to sound event localization and detection
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 
 sound event detection (SED) and direction-of-arrival estimation (DOAE) by jointly recognizing the sound classes, 
@@ -133,10 +137,15 @@ Our code support the following features:
 | linspecgcc  | MIC      | multichannel log-linear spectrograms  + GCC-PHAT   | 10 |
 | **SALSA**   | FOA      | multichannel log-linear spectrograms  + eigenvector-based intensity vector (EIV)    | 7 |
 | **SALSA**   | MIC      | multichannel log-linear spectrograms  + eigenvector-based phase vector (EPV)    | 7 |
+| **SALSA-IPD** | MIC    | multichannel log-linear spectrograms  + interchannel phase difference (IPD) | 7 |
+| **SALSA-Lite**| MIC    | multichannel log-linear spectrograms  + normalized interchannel phase difference (NIPD) | 7 |
 
 Note: the number of channels are calculated based on four-channel inputs.
 
 To extract **SALSA** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_feature_config.yml` in 
+`dataset\configs\` folder. Then run `make salsa`
+
+To extract **SALSA-Lite** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_lite_feature_config.yml` in 
 `dataset\configs\` folder. Then run `make salsa`
 
 To extract *linspeciv*, *melspeciv*, *linspecgcc*, *melspecgcc* feature, 

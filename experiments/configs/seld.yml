@@ -3,7 +3,7 @@ name: 'map'
 feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/tfmap/foa/24000fs_512nfft_300nhop_5cond_9000fmaxdoa'
 feature_type: 'salsa' # 'salsa' | 'melspeciv' | 'linspeciv' | 'melspecgcc' | 'linspecgcc'
 gt_meta_root_dir: '/data/seld_dcase2021/task3'
-split_meta_dir: 'dataset/meta/dcase2021/original'  # change to absolute path if you encounter error
+split_meta_dir: 'dataset/meta/dcase2021/original'  # change to absolute path if you encounter file-not-found error
 seed: 2021
 mode: 'crossval'  # 'crossval' | 'eval'
 data:

@@ -116,6 +116,9 @@ This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](ht
     └──mic_eval
 ```
 
+For TAU-NIGENS Spatial Sound Events 2021 dataset, please move wav files from subfolders `dev_train`, `dev_val`, 
+`dev_test` to outer folder `foa_dev` or `mic_dev`. 
+
 ## Feature extraction
 
 Our code support the following features:  

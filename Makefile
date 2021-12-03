@@ -16,6 +16,15 @@ salsa:
 	PYTHONPATH=$(shell pwd) python dataset/salsa_feature_extraction.py --data_config=$(SALSA_CONFIG)
 
 
+# SALSA-LITE feature extraction
+SALSA_LITE_CONFIG=./dataset/configs/tnsse2021_salsa_lite_feature_config.yml
+SALSA_LITE_FEATURE_TYPE=salsa_lite  # salsa_lite | salsa_ipd
+
+.phony: salsa-lite
+salsa-lite:
+	PYTHONPATH=$(shell pwd) python dataset/salsa_lite_feature_extraction.py --data_config=$(SALSA_LITE_CONFIG) --feature_type=$(SALSA_LITE_FEATURE_TYPE)
+
+
 # Training and inference
 CONFIG_PATH=./experiments/configs/
 CONFIG_NAME=seld.yml

@@ -1,7 +1,5 @@
 """
-This module extract stft feature (magnitude / magnitude and phase/ real and imaginary) + ss-mask + tf doa estimation
-(x, y, z format) -> output: n_channels x n_frames x n_bins
-n_channels = 4 (magnitude) + 1 (mask) + 3 (x, y, z)  = 8
+This module extract salsa features for both first order ambisonics and microphone array formats.
 """
 import os
 import shutil

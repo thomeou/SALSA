@@ -146,7 +146,7 @@ To extract **SALSA** feature, edit directories for data and feature accordingly 
 `dataset\configs\` folder. Then run `make salsa`
 
 To extract **SALSA-Lite** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_lite_feature_config.yml` in 
-`dataset\configs\` folder. Then run `make salsa`
+`dataset\configs\` folder. Then run `make salsa-lite`
 
 To extract *linspeciv*, *melspeciv*, *linspecgcc*, *melspecgcc* feature, 
 edit directories for data and feature accordingly in `tnsse_2021_feature_config.yml` in 

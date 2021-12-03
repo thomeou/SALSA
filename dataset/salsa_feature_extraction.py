@@ -286,7 +286,7 @@ def extract_features(data_config: str = 'configs/tnsse2021_salsa_feature_config.
             cfg = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             print(exc)
-    feature_type = 'tfmap'
+    feature_type = 'salsa'
 
     # Parse config file
     audio_format = cfg['data']['format']

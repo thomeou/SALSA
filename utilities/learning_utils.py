@@ -17,6 +17,7 @@ import torch.nn as nn
 class LearningRateScheduler(pl.Callback):
     def __init__(self, steps_per_epoch, max_epochs: int = 50, milestones: Tuple = (0, 0.45, 0.9, 1.0),
                  lrs: Tuple = (1e-4, 1e-2, 1e-3, 1e-4), moms: Tuple = (0.9, 0.8, 0.9, 0.9)):
+        super().__init__()
         self.steps_per_epoch = steps_per_epoch
         self.max_epochs = max_epochs
         self.milestones = milestones
@@ -69,6 +70,7 @@ def count_model_params(model: nn.Module) -> None:
 
 class MyLoggingCallback(pl.Callback):
     def __init__(self):
+        super().__init__()
         self.lit_logger = logging.getLogger('lightning')
         self.train_start_time = None
         self.train_end_time = None

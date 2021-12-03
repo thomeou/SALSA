@@ -40,7 +40,7 @@ def inference(exp_config: str = './configs/seld.yml',
     :param submission_tag: tag name to submission file.
     """
     # Load config, create folders, logging
-    cfg = manage_experiments(exp_config=exp_config, exp_group_dir=exp_group_dir, exp_suffix=exp_suffix)
+    cfg = manage_experiments(exp_config=exp_config, exp_group_dir=exp_group_dir, exp_suffix=exp_suffix, is_train=False)
     logger = logging.getLogger('lightning')
     split_group = os.path.split(cfg.split_meta_dir)[-1]
     logger.info('Inference for split : {} in split meta {}'.format(inference_split, split_group))

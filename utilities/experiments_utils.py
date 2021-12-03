@@ -7,18 +7,21 @@ import shutil
 from datetime import datetime
 
 import yaml
+from pathlib import Path
 from munch import munchify, Munch
 from tqdm import tqdm
 
 
 def manage_experiments(exp_config: str = 'configs/exp1.yml',
                        exp_group_dir: str = '',
-                       exp_suffix: str = '_first_exp'):
+                       exp_suffix: str = '_first_exp',
+                       is_train: bool = True):
     """
     Function to load config, create folder and logging.
     :param exp_config: Config file for experiments
     :param exp_group_dir: Parent directory to store all experiment results.
     :param exp_suffix: Experiment suffix.
+    :param is_train: If True, create folders.
     :return: config
     """
     # Load data config files
@@ -32,17 +35,22 @@ def manage_experiments(exp_config: str = 'configs/exp1.yml',
 
     # Create experiment folder
     exp_name = os.path.splitext(os.path.basename(exp_config))[0] + exp_suffix
-    create_exp_folders(cfg=cfg, exp_group_dir=exp_group_dir, exp_name=exp_name)
+    create_exp_folders(cfg=cfg, exp_group_dir=exp_group_dir, exp_name=exp_name, is_train=is_train)
+
+    # Check if exp folder exists
+    assert Path(cfg.dir.exp_dir).is_dir(), 'Experiment folder does not exist!'
 
     # Create logging
     create_logging(log_dir=cfg.dir.logs_dir, filemode='a')
+    logger = logging.getLogger('lightning')
 
     # Write config file to output folder
-    yaml_config_fn = os.path.join(cfg.dir.config_dir,
-                                  'exp_config_{}.yml'.format(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')))
-    write_yaml_config(output_filename=yaml_config_fn, config_dict=cfg_dict)
-    logger = logging.getLogger('lightning')
-    logger.info('Write yaml config file to {}'.format(cfg.dir.config_dir))
+    if is_train:
+        yaml_config_fn = os.path.join(cfg.dir.config_dir,
+                                      'exp_config_{}.yml'.format(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')))
+        write_yaml_config(output_filename=yaml_config_fn, config_dict=cfg_dict)
+        logger.info('Write yaml config file to {}'.format(cfg.dir.config_dir))
+
     logger.info('Finish parsing config file: {}.'.format(exp_config))
 
     return cfg
@@ -53,51 +61,61 @@ def create_empty_folder(folder_name) -> None:
     os.makedirs(folder_name, exist_ok=True)
 
 
-def create_exp_folders(cfg, exp_group_dir: str = '', exp_name: str = '', empty: bool = False) -> None:
+def create_exp_folders(cfg, exp_group_dir: str = '', exp_name: str = '', empty: bool = False,
+                       is_train: bool = True) -> None:
     """
     Create folders required for experiments.
     :param cfg: Experiment config object.
     :param exp_group_dir: Experiment directory.
     :param exp_name: Experiment name.
     :param empty: If true, delete all previous data in experiment folder.
+    :param is_train: If True, create folders.
     """
     # 1. Experiment directory
     cfg.dir = Munch()
     cfg.dir.exp_dir = os.path.join(exp_group_dir, cfg.mode, cfg.data.audio_format, cfg.feature_type, exp_name)
-    if empty:
-        create_empty_folder(cfg.dir.exp_dir)
-    else:
-        os.makedirs(cfg.dir.exp_dir, exist_ok=True)
+    if is_train:
+        if empty:
+            create_empty_folder(cfg.dir.exp_dir)
+        else:
+            os.makedirs(cfg.dir.exp_dir, exist_ok=True)
 
     # 2. config directory
     cfg.dir.config_dir = os.path.join(cfg.dir.exp_dir, 'configs')
-    os.makedirs(cfg.dir.config_dir, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.config_dir, exist_ok=True)
 
     # 3. log directory
     cfg.dir.logs_dir = os.path.join(cfg.dir.exp_dir, 'logs')
-    os.makedirs(cfg.dir.logs_dir, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.logs_dir, exist_ok=True)
 
     # 4. tensorboard directory
     cfg.dir.tb_dir = os.path.join(cfg.dir.exp_dir, 'tensorboard')
-    os.makedirs(cfg.dir.tb_dir, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.tb_dir, exist_ok=True)
 
     # 5. model directory
     cfg.dir.model = Munch()
     # 5.1 model checkpoint
     cfg.dir.model.checkpoint = os.path.join(cfg.dir.exp_dir, 'models', 'checkpoint')
-    os.makedirs(cfg.dir.model.checkpoint, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.model.checkpoint, exist_ok=True)
     # 5.2 best model
     cfg.dir.model.best = os.path.join(cfg.dir.exp_dir, 'models', 'best')
-    os.makedirs(cfg.dir.model.best, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.model.best, exist_ok=True)
 
     # 6. output directory
     cfg.dir.output_dir = Munch()
     # 6.1 submission directory
     cfg.dir.output_dir.submission = os.path.join(cfg.dir.exp_dir, 'outputs', 'submissions')
-    os.makedirs(cfg.dir.output_dir.submission, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.output_dir.submission, exist_ok=True)
     # 6.2 prediction directory
     cfg.dir.output_dir.prediction = os.path.join(cfg.dir.exp_dir, 'outputs', 'predictions')
-    os.makedirs(cfg.dir.output_dir.prediction, exist_ok=True)
+    if is_train:
+        os.makedirs(cfg.dir.output_dir.prediction, exist_ok=True)
 
 
 class TqdmLoggingHandler(logging.Handler):

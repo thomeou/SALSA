@@ -27,7 +27,7 @@ def train(exp_config: str = './configs/seld.yml',
     :param resume: If true, resume training from the last epoch.
     """
     # Load config, create folders, logging
-    cfg = manage_experiments(exp_config=exp_config, exp_group_dir=exp_group_dir, exp_suffix=exp_suffix)
+    cfg = manage_experiments(exp_config=exp_config, exp_group_dir=exp_group_dir, exp_suffix=exp_suffix, is_train=True)
     logger = logging.getLogger('lightning')
 
     # Set random seed for reproducible
@@ -67,7 +67,7 @@ def train(exp_config: str = './configs/seld.yml',
 
     # Console logger
     console_logger = MyLoggingCallback()
-    #
+
     # Tensorboard logger
     tb_logger = TensorBoardLogger(save_dir=cfg.dir.tb_dir, name='my_model')
 

@@ -14,8 +14,8 @@ class SeldDataset(Dataset):
     """
     Chunk dataset for SELD task
     """
-
     def __init__(self, db_data, joint_transform=None, transform=None):
+        super().__init__()
         self.features = db_data['features']
         self.sed_targets = db_data['sed_targets']
         self.doa_targets = db_data['doa_targets']

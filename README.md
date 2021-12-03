@@ -157,6 +157,9 @@ edit directories for data and feature accordingly in `tnsse_2021_feature_config.
 To train SELD model with SALSA feature, edit the *feature_root_dir* and *gt_meta_root_dir* in the experiment config 
 `experiments\configs\seld.yml`. Then run `make train`. 
 
+To train SELD model with SALSA-Lite feature, edit the *feature_root_dir* and *gt_meta_root_dir* in the experiment config 
+`experiments\configs\seld_salsa_lite.yml`. Then run `make train`. 
+
 To do inference, run `make inference`. To evaluate output, edit the `Makefile` accordingly and run `make evaluate`.
 
 ## DCASE2021 Sound Event Localization and Detection Challenge

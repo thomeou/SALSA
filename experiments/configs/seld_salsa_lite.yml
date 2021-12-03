@@ -1,0 +1,62 @@
+# Config to train model with SALSA_LITE feature
+name: 'map'
+feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/salsa_lite/mic/24000fs_512nfft_300nhop_2000fmaxdoa'
+feature_type: 'salsa' # Set feature type to 'salsa', even if feature is salsa_lite or salsa_ipd
+gt_meta_root_dir: '/data/seld_dcase2021/task3'
+split_meta_dir: 'dataset/meta/dcase2021/original'  # change to absolute path if you encounter file-not-found error
+seed: 2021
+mode: 'crossval'  # 'crossval' | 'eval'
+data:
+  fs: 24000
+  n_fft: 512
+  hop_len: 300
+  n_mels: 191  # this variable name is actually n_freqs
+  audio_format: 'mic'  # 'foa' | 'mic'
+  label_rate: 10  # Label rate per second
+  train_chunk_len_s: 8
+  train_chunk_hop_len_s: 0.5
+  test_chunk_len_s: 60.0
+  test_chunk_hop_len_s: 60.1 # set test_chunk_hop_len_s > test_chunk_len_s if we want to evaluate the whole clip at once
+  n_classes: 12  # 12 for 2021 TNSSE dataset, 14 for 2020 TNSSE dataset
+  train_fraction: 1.0
+  val_fraction: 1.0
+  output_format: 'reg_xyz' # 'reg_xyz' (default) | 'accdoa'
+model:
+  encoder:
+    name: 'PannResNet22'
+    n_input_channels: 7  # salsa_lite, salsa_ipd: 7
+  decoder:
+    name: 'SeldDecoder'
+    decoder_type: 'bigru'   # 'gru'| 'bigru'| 'lstm'| bilstm'| 'transformer',
+    decoder_size: 256
+    freq_pool: 'avg'  # 'avg'| 'max'| 'avg_max'
+training:
+  train_batch_size: 32  # Reduce batch size if GPU is out of memory
+  val_batch_size: 32
+  optimizer: 'adam'
+  lr_scheduler:
+    milestones:
+      - 0.0
+      - 0.1
+      - 0.7
+      - 1.0
+    lrs:
+      - 3.e-4
+      - 3.e-4
+      - 3.e-4
+      - 1.e-4
+    moms:  # momentums
+      - 0.9
+      - 0.9
+      - 0.9
+      - 0.9
+  loss_weight:
+    - 0.3
+    - 0.7
+  max_epochs: 50  # epoch counting from [0 to n-1]
+  val_interval: 1
+sed_threshold: 0.3
+doa_threshold: 20
+eval_version: '2021'  # '2020'| '2021'
+
+

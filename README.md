@@ -9,10 +9,10 @@
             first-order ambisonics microphone (FOA) (left) and 4-channel microphone array (MIC) (right).</em>
 </p>
 
-Official implementation for Spatial Cue-AugmentedLog-Spectrogram Features **SALSA** for polyphonic sound event localization and detection.
+Official implementation for Spatial Cue-Augmented Log-Spectrogram Features **SALSA** for polyphonic sound event localization and detection.
 
 <pre>
-SALSA: Spatial Cue-AugmentedLog-Spectrogram Features for Polyphonic Sound Event Localization and Detection
+SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection
 Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones; Woon-Seng Gan. 
 </pre>
 

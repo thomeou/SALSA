@@ -172,9 +172,9 @@ Events 2021 dataset, combination of only CS and FS is better than combination of
 ![SALSA_DRR](figures/SALSA_and_SALSA_DRR.png "SALSA vs SALSA_DRR")
 
 ## Citation
-Please consider citing our paper if you find this code useful for your research. Thank you!!!
+Please consider citing our papers if you find this code useful for your research. Thank you!!!
 
-SALSA:
+SALSA
 ```
 @article{nguyen2021salsa,
   title={SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection},
@@ -184,7 +184,7 @@ SALSA:
 }
 ```
 
-SALSA-Lite:
+SALSA-Lite
 ```
 @inproceedings{nguyen2022salsa_lite,
   title={SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays},

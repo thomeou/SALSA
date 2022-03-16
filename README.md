@@ -9,18 +9,13 @@
             first-order ambisonics microphone (FOA) (left) and 4-channel microphone array (MIC) (right).</em>
 </p>
 
-Official implementation for Spatial Cue-Augmented Log-Spectrogram Features **SALSA** for polyphonic sound event localization and detection.
+Official implementation for **SALSA: Spatial Cue-Augmented Log-Spectrogram Features** for polyphonic sound event localization and detection.
 
-<pre>
-SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection
-Thi Ngoc Tho Nguyen; Karn N. Watcharasupat; Ngoc Khanh Nguyen; Douglas L. Jones; Woon-Seng Gan. 
-</pre>
+> Thi Ngoc Tho Nguyen, Karn N. Watcharasupat, Ngoc Khanh Nguyen, Douglas L. Jones, Woon-Seng Gan. **SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection,** 2021. [[**arXiv**]](https://arxiv.org/abs/2110.00275)
 
-[[**ArXiv paper**]](https://arxiv.org/abs/2110.00275)
+**Update**: SALSA-Lite feature has been added to the repo.
 
-**Update**
-
-SALSA-Lite feature has been added to the repo.
+> Thi Ngoc Tho Nguyen, Douglas L. Jones, Karn N. Watcharasupat, Huy Phan, Woon-Seng Gan. **SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays,** to be presented at ICASSP 2022. [[**arXiv**]](https://arxiv.org/abs/2111.08192)
 
 ## Introduction to sound event localization and detection
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 

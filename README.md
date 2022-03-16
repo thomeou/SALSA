@@ -173,11 +173,33 @@ Events 2021 dataset, combination of only CS and FS is better than combination of
 
 ## Citation
 Please consider citing our paper if you find this code useful for your research. Thank you!!!
+
+SALSA:
 ```
 @article{nguyen2021salsa,
   title={SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection},
   author={Nguyen, Thi Ngoc Tho and Watcharasupat, Karn N and Nguyen, Ngoc Khanh and Jones, Douglas L and Gan, Woon-Seng},
   journal={arXiv preprint arXiv:2110.00275},
+  year={2021}
+}
+```
+
+SALSA-Lite:
+```
+@inproceedings{nguyen2022salsa_lite,
+  title={SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays},
+  author={Nguyen, Thi Ngoc Tho and Jones, Douglas L and Watcharasupat, Karn N and Phan, Huy and Gan, Woon-Seng},
+  booktitle={2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year={2022}
+}
+```
+
+DCASE 2021 Technical Report
+```
+@techreport{nguyen2021dcase,
+  title={DCASE 2021 Task 3: Spectrotemporally-aligned Features for Polyphonic Sound Event Localization and Detection},
+  author={Nguyen, Thi Ngoc Tho and Watcharasupat, Karn and Nguyen, Ngoc Khanh and Jones, Douglas L and Gan, Woon Seng},
+  institution={IEEE AASP Challenge on Detection and Classification of Acoustic Scenes and Events 2021},
   year={2021}
 }
 ```

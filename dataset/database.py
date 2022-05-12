@@ -112,7 +112,7 @@ class Database:
                           pointer + n_crop_frames - self.chunk_len // downsample_ratio + 1,
                           self.chunk_hop_len // downsample_ratio).tolist()
         # Include the leftover of the cropped data
-        if (n_crop_frames - self.chunk_len // downsample_ratio) % self.chunk_hop_len // downsample_ratio != 0:
+        if (n_crop_frames - self.chunk_len // downsample_ratio) % (self.chunk_hop_len // downsample_ratio) != 0:
             idxes.append(pointer + n_crop_frames - self.chunk_len // downsample_ratio)
         pointer += n_crop_frames
 

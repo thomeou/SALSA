@@ -10,7 +10,7 @@ data:
   fs: 24000
   n_fft: 512
   hop_len: 300
-  n_mels: 200  # can be n_freqs, can be n_mels -- I changed it to 64
+  n_mels: 200  # can be n_freqs, can be n_mels
   audio_format: 'foa'  # 'foa' | 'mic'
   label_rate: 10  # Label rate per second
   train_chunk_len_s: 8
@@ -31,7 +31,7 @@ model:
     decoder_size: 256
     freq_pool: 'avg'  # 'avg'| 'max'| 'avg_max'
 training:
-  train_batch_size: 16  # Reduce batch size if GPU is out of memory
+  train_batch_size: 32  # Reduce batch size if GPU is out of memory
   val_batch_size: 32
   optimizer: 'adam'
   lr_scheduler:

@@ -1,6 +1,6 @@
 # Config to extract SALSA-Lite or SALSA-IPD feature for TAU-NIGENS Spatial Sound Events (TNSSE) 2021 dataset
-data_dir: '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3'
-feature_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features'
+data_dir: 'dataset/data'
+feature_dir: 'dataset/features'
 data:
   format: 'mic'
   fs: 24000

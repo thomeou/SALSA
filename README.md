@@ -78,47 +78,53 @@ For more results, please refer to the paper listed above.
 
 ## Prepare dataset and environment
 
+
 This code is tested on Ubuntu 18.04 with Python 3.7, CUDA 11.0 and Pytorch 1.7
 
-1. Install the following dependencies by `pip install -r requirements.txt`. Or manually install these modules:
-    * numpy
-    * scipy
-    * pandas
-    * scikit-learn
-    * h5py
-    * librosa
-    * tqdm
-    * pytorch 1.7
-    * pytorch-lightning      
-    * tensorboardx
-    * pyyaml
-    * munch
+It, also, contains Unix specific commands which won't work on Windows, hence, Ubuntu is needed.
 
-2. Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). 
-This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](https://zenodo.org/record/4064792). 
+You can either use Ubuntu as a standalone OS or as a Windows Subsystem for Linux 2 (WSL 2) on Windows 10 or 11. If you decided to use WSL 2, you can use no version higher than Ubuntu v20.04 because CUDA is not installable on higher versions. If you are using WSL 2, then replace step 3 in the steps section with step 4.
 
-3. Extract everything into the same folder. 
+## **Prerequisites**
 
-4. Data file structure should look like this:
+ 1. Ubuntu (preferable either v18.04 or 20.04)
+ 2. Python
+ 3. Anaconda or Miniconda
+ 4. GNU Make
 
-```
-./
-├── feature_extraction.py
-├── ...
-└── data/
-    ├──foa_dev
-    │   ├── fold1_room1_mix001.wav
-    │   ├── fold1_room1_mix002.wav  
-    │   └── ...
-    ├──foa_eval
-    ├──metadata_dev
-    ├──metadata_eval (might not be available yet)
-    ├──mic_dev
-    └──mic_eval
-```
+## **Steps:**
 
-For TAU-NIGENS Spatial Sound Events 2021 dataset, please move wav files from subfolders `dev_train`, `dev_val`, 
-`dev_test` to outer folder `foa_dev` or `mic_dev`. 
+1. Create a conda env by `conda create -n salsa python=3.7`
+2. Activate the env by `conda activate salsa`
+3. Install libraries and dependecies using `pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html` 
+4. (Only for WSL 2 Users) Instead of step 3, open the `requirements.txt` file in the root folder, and remove line 7, which is `torch==1.7.0+cu110`. Then run the following command `pip install -r requirements.txt`. Then go to [Pytorch's Website](https://pytorch.org/get-started/previous-versions/), and download a higher version of torch (preferable version 1.8.0 with CUDA 11.1). This step is required because CUDA 11.0 is not supported by WSL 2.
+5. Install the required CUDA version inside the salsa env; you can find the right set of commands through the cuda toolkit website (Google the required version. Ex: "Download cuda 11.0")
+
+6. Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](https://zenodo.org/record/4064792).
+7. Create a new folder inside the dataset folder, and name it `data`  
+8. Extract everything into the `data` folder.
+9. Data file structure should look like this:
+
+  ```
+  ./
+  ├── feature_extraction.py
+  ├── ...
+  └── data/
+      ├──foa_dev
+      │   ├── fold1_room1_mix001.wav
+      │   ├── fold1_room1_mix002.wav  
+      │   └── ...
+      ├──foa_eval
+      ├──metadata_dev
+      ├──metadata_eval (might not be available yet)
+      ├──mic_dev
+      └──mic_eval
+  ```
+
+  For TAU-NIGENS Spatial Sound Events 2021 dataset, please move ALL files from the subfolders into their outer folder; making no folders inside the  `foa_dev`, `foa_val`, `metadata_dev` , `mic_dev`, and `mic_eval`.
+
+  10. Copy the `dev.csv`, `test.csv`, `train.csv`, and `val.csv` from `SALSA\dataset\meta\dcase2021\original` into the data folder in `SALSA\dataset\data` along the extracted folders.
+
 
 ## Feature extraction
 
@@ -137,25 +143,37 @@ Our code support the following features:
 
 Note: the number of channels are calculated based on four-channel inputs.
 
-To extract **SALSA** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_feature_config.yml` in 
-`dataset\configs\` folder. Then run `make salsa`
+To extract **SALSA** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_feature_config.yml` in `dataset\configs\` folder. Then run `make salsa`
 
-To extract **SALSA-Lite** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_lite_feature_config.yml` in 
-`dataset\configs\` folder. Then run `make salsa-lite`
 
-To extract *linspeciv*, *melspeciv*, *linspecgcc*, *melspecgcc* feature, 
-edit directories for data and feature accordingly in `tnsse_2021_feature_config.yml` in 
-`dataset\configs\` folder. Then run `make feature`
+To extract **SALSA-Lite** feature, edit directories for data and feature accordingly in `tnsse_2021_salsa_lite_feature_config.yml` in `dataset\configs\` folder. Then run `make salsa-lite`
+
+
+To extract *linspeciv*, *melspeciv*, *linspecgcc*, *melspecgcc* feature, edit directories for data and feature accordingly in `tnsse_2021_feature_config.yml` in `dataset\configs\` folder. Then run `make feature`
+
 
 ## Training and inference
 
-To train SELD model with SALSA feature, edit the *feature_root_dir* and *gt_meta_root_dir* in the experiment config 
-`experiments\configs\seld.yml`. Then run `make train`. 
 
-To train SELD model with SALSA-Lite feature, edit the *feature_root_dir* and *gt_meta_root_dir* in the experiment config 
-`experiments\configs\seld_salsa_lite.yml`. Then run `make train`. 
+To train SELD model with SALSA feature, edit the *feature_root_dir* in the experiment config `experiments\configs\seld.yml`. 
 
-To do inference, run `make inference`. To evaluate output, edit the `Makefile` accordingly and run `make evaluate`.
+1. For `foa wav files`, use this path:
+	```
+	feature_root_dir: 'dataset/features/salsa/mic/24000fs_512nfft_300nhop_5cond_4000fmaxdoa'  # for SALSA
+	feature_root_dir: 'dataset/features/salsa_lite/mic/24000fs_512nfft_300nhop_2000fmaxdoa'  # for SALSA-Lite
+	```
+2.  For `mic wav files`, use this path:
+	```
+	'dataset/features/salsa/foa/24000fs_512nfft_300nhop_5cond_9000fmaxdoa' #for SALSA
+	```
+  Then run `make train-salsa`.
+
+  
+
+To train SELD model with SALSA-Lite feature, edit the *feature_root_dir* in the experiment config `experiments\configs\seld_salsa_lite.yml`. Then run `make train-salsa-lite`.
+
+
+To do inference, run `make inference-salsa` for SALSA feature or `make inference-salsa-lite` for SALSA-lite feature. To evaluate output, edit the `Makefile` accordingly and run `make evaluate`.
 
 ## DCASE2021 Sound Event Localization and Detection Challenge
 

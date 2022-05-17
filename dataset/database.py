@@ -14,14 +14,13 @@ import numpy as np
 import pandas as pd
 
 
-class Database:
+class Database:#
     """
     Database class to handle one input streams for SELD
     """
     def __init__(self,
-                 feature_root_dir: str = '/data/seld_dcase2021/features/tfmap/foa/'
-                                         '24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
-                 gt_meta_root_dir: str = '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3',
+                 feature_root_dir: str = 'dataset/features/salsa/foa/24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
+                 gt_meta_root_dir: str = 'dataset/data',
                  audio_format: str = 'foa', n_classes: int = 12, fs: int = 24000,
                  n_fft: int = 1024, hop_len: int = 300, label_rate: float = 10, train_chunk_len_s: float = 8.0,
                  train_chunk_hop_len_s: float = 0.5, test_chunk_len_s: float = 4.0, test_chunk_hop_len_s: float = 2.0,
@@ -155,7 +154,7 @@ class Database:
 
         # Load and crop data
         features, sed_targets, doa_targets, feature_chunk_idxes, gt_chunk_idxes, filename_list, test_batch_size = \
-            self.load_chunk_data(split_filenames=split_filenames, split_sed_feature_dir=split_sed_feature_dir,
+            self.load_chunk_data_helper(split_filenames=split_filenames, split_sed_feature_dir=split_sed_feature_dir,
                                  gt_meta_dir=gt_meta_dir)
         # pack data
         db_data = {
@@ -171,6 +170,21 @@ class Database:
         }
 
         return db_data
+
+    def load_chunk_data_helper(self, split_filenames: List, split_sed_feature_dir: str, gt_meta_dir: str):
+        
+        # Splitting the split_filenames list to smaller lists divisble by 100
+        splitted_split_filenames = np.array_split(split_filenames, (np.ceil(len(split_filenames) / 100)))
+
+        for smallList in splitted_split_filenames:
+            
+            # outputs of the smaller lists gets concatinated to the following variables, which will be
+            # returned to call of the method after exiting the loop
+            features, sed_targets, doa_targets, feature_chunk_idxes, gt_chunk_idxes, filename_list, test_batch_size = \
+                self.load_chunk_data(split_filenames=smallList, split_sed_feature_dir=split_sed_feature_dir,
+                                gt_meta_dir=gt_meta_dir)
+
+        return features, sed_targets, doa_targets, feature_chunk_idxes, gt_chunk_idxes, filename_list, test_batch_size     
 
     def load_chunk_data(self, split_filenames: List, split_sed_feature_dir: str, gt_meta_dir: str):
         """
@@ -297,9 +311,8 @@ class Database:
 
 
 if __name__ == '__main__':
-    tp_db = Database(feature_root_dir='/data/seld_dcase2021/features/tfmap/mic/'
-                                      '24000fs_512nfft_300nhop_5cond_4000fmaxdoa',
-                     output_format='reg_xyz', test_chunk_len_s=8, test_chunk_hop_len_s=0.5, audio_format='mic')
+    tp_db = Database(feature_root_dir='dataset/features/salsa/foa/24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
+                     output_format='reg_xyz', test_chunk_len_s=8, test_chunk_hop_len_s=0.5, audio_format='foa')
     # tp_db = SeldDatabase()
     db_data = tp_db.get_split(split='val', split_meta_dir='meta/dcase2021/original', stage='inference')
     print(db_data['features'].shape)

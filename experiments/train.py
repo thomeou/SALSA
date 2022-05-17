@@ -16,7 +16,7 @@ from utilities.learning_utils import LearningRateScheduler, MyLoggingCallback
 
 
 def train(exp_config: str = './configs/seld.yml',
-          exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+          exp_group_dir: str = './outputs',
           exp_suffix: str = '_test',
           resume: bool = False):
     """

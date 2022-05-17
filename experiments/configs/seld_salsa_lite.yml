@@ -1,8 +1,8 @@
 # Config to train model with SALSA_LITE feature
 name: 'map'
-feature_root_dir: '/media/tho_nguyen/disk2/new_seld/dcase2021/features/salsa_lite/mic/24000fs_512nfft_300nhop_2000fmaxdoa'
+feature_root_dir: 'dataset/features/salsa_lite/mic/24000fs_512nfft_300nhop_2000fmaxdoa'
 feature_type: 'salsa' # Set feature type to 'salsa', even if feature is salsa_lite or salsa_ipd
-gt_meta_root_dir: '/data/seld_dcase2021/task3'
+gt_meta_root_dir: 'dataset/data'
 split_meta_dir: 'dataset/meta/dcase2021/original'  # change to absolute path if you encounter file-not-found error
 seed: 2021
 mode: 'crossval'  # 'crossval' | 'eval'
@@ -11,7 +11,7 @@ data:
   n_fft: 512
   hop_len: 300
   n_mels: 191  # this variable name is actually n_freqs
-  audio_format: 'mic'  # 'foa' | 'mic'
+  audio_format: 'foa'  # 'foa' | 'mic'
   label_rate: 10  # Label rate per second
   train_chunk_len_s: 8
   train_chunk_hop_len_s: 0.5

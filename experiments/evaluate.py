@@ -13,11 +13,10 @@ import numpy as np
 from metrics import dcase_utils, SELD2020_evaluation_metrics, SELD2021_evaluation_metrics
 
 
-def evaluate_seld(output_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs/crossval/mic/'
-                                    'salsa/seld_test/outputs/submissions/original/mic_test',
+def evaluate_seld(output_dir: str = './outputs/crossval/foa/salsa/seld_test/outputs/submissions/original/foa_test',
                   data_version: str = '2021',
                   metric_version: str = '2021',
-                  gt_meta_root_dir: str = '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3/',
+                  gt_meta_root_dir: str = 'dataset/data',
                   is_eval_split: bool = False,
                   ):
     """

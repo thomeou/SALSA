@@ -26,25 +26,31 @@ salsa-lite:
 
 
 # Training and inference
-CONFIG_PATH=./experiments/configs/
-CONFIG_NAME=seld.yml
+CONFIG_DIR=./experiments/configs
 OUTPUT=./outputs   # Directory to save output
 EXP_SUFFIX=_test   # the experiment name = CONFIG_NAME + EXP_SUFFIX
 RESUME=False
 GPU_NUM=0  # Set to -1 if there is no GPU
 
-.phony: train
-train:
-	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/train.py --exp_config="${CONFIG_PATH}${CONFIG_NAME}" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX) --resume=$(RESUME)
+.phony: train-salsa
+train-salsa:
+	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/train.py --exp_config="${CONFIG_DIR}/seld.yml" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX) --resume=$(RESUME)
 
-.phony: inference
-inference:
-	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/inference.py --exp_config="${CONFIG_PATH}${CONFIG_NAME}" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX)
+.phony: inference-salsa
+inference-salsa:
+	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/inference.py --exp_config="${CONFIG_DIR}/seld.yml" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX)
 
+.phony: train-salsa-lite
+train-salsa-lite:
+	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/train.py --exp_config="${CONFIG_DIR}/seld_salsa_lite.yml" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX) --resume=$(RESUME)
+
+.phony: inference-salsa-lite
+inference-salsa-lite:
+	PYTHONPATH=$(shell pwd) CUDA_VISIBLE_DEVICES="${GPU_NUM}" python experiments/inference.py --exp_config="${CONFIG_DIR}/seld_salsa_lite.yml" --exp_group_dir=$(OUTPUT) --exp_suffix=$(EXP_SUFFIX)
 
 # Evaluate
-OUTPUT_DIR=./outputs/crossval/foa/salsa/seld_test/outputs/submissions/original/foa_test
-GT_ROOT_DIR=/data/seld_dcase2021/task3
+OUTPUT_DIR=./outputs/crossval/mic/salsa/seld_test/outputs/submissions/original/mic_test
+GT_ROOT_DIR=./dataset/data
 IS_EVAL_SPLIT=False
 
 .phony: evaluate

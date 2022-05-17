@@ -22,7 +22,7 @@ from utilities.learning_utils import MyLoggingCallback
 
 
 def inference(exp_config: str = './configs/seld.yml',
-              exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+              exp_group_dir: str = './outputs',
               exp_suffix: str = '_test',
               epoch: int = None,
               ckpt_type: str = 'best',
@@ -126,7 +126,7 @@ def inference(exp_config: str = './configs/seld.yml',
 
 
 def inference_all_splits(exp_config: str = './configs/seld.yml',
-                         exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+                         exp_group_dir: str = './outputs',
                          exp_suffix: str = '_test',
                          epoch: int = None,
                          ckpt_type: str = 'best',  # 'best' | 'checkpoint' (automatic select best model in 'best' or 'checkpoint')

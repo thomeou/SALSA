@@ -64,8 +64,8 @@ class SeldDataset(Dataset):
 
 if __name__ == '__main__':
     # test dataloader
-    db = Database(feature_root_dir='/data/seld_dcase2021/features/tfmap/mic/24000fs_512nfft_300nhop_5cond_4000fmaxdoa',
-                  audio_format='mic', output_format='reg_xyz')
+    db = Database(feature_root_dir='dataset/features/salsa/foa/24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
+                  audio_format='foa', output_format='reg_xyz')
     data_db = db.get_split(
         split='val', split_meta_dir='meta/dcase2021/original')
 

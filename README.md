@@ -97,7 +97,7 @@ You can either use Ubuntu as a standalone OS or as a Windows Subsystem for Linux
 1. Create a conda env by `conda create -n salsa python=3.7`
 2. Activate the env by `conda activate salsa`
 3. Install libraries and dependecies using `pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html` 
-4. (Only for WSL 2 Users) Instead of step 3, open the `requirements.txt` file in the root folder, and remove line 7, which is `torch==1.7.0+cu110`. Then run the following command `pip install -r requirements.txt`. Then go to [Pytorch's Website](https://pytorch.org/get-started/previous-versions/), and download a higher version of torch (preferable version 1.8.0 with CUDA 11.1). This step is required because CUDA 11.0 is not supported by WSL 2.
+4. (Only for WSL 2 Users) Instead of step 3, open the `requirements.txt` file in the root folder, and remove line 7, which is `torch==1.7.0+cu110`. Then run the following command `pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html`. Then go to [Pytorch's Website](https://pytorch.org/get-started/previous-versions/), and download a higher version of torch (preferable version 1.8.0 with CUDA 11.1). This step is required because CUDA 11.0 is not supported by WSL 2.
 5. Install the required CUDA version inside the salsa env; you can find the right set of commands through the cuda toolkit website (Google the required version. Ex: "Download cuda 11.0")
 
 6. Download TAU-NIGENS Spatial Sound Events 2021 dataset [here](https://zenodo.org/record/4844825). This code also works with TAU-NIGENS Spatial Sound Events 2020 dataset [here](https://zenodo.org/record/4064792).

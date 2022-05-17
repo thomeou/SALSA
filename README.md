@@ -11,11 +11,11 @@
 
 Official implementation for **SALSA: Spatial Cue-Augmented Log-Spectrogram Features** for polyphonic sound event localization and detection.
 
-> Thi Ngoc Tho Nguyen, Karn N. Watcharasupat, Ngoc Khanh Nguyen, Douglas L. Jones, Woon-Seng Gan. **SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection,** 2021. [[**arXiv**]](https://arxiv.org/abs/2110.00275)
-
 **Update**: SALSA-Lite feature has been added to the repo.
 
-> Thi Ngoc Tho Nguyen, Douglas L. Jones, Karn N. Watcharasupat, Huy Phan, Woon-Seng Gan. **SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays,** to be presented at ICASSP 2022. [[**arXiv**]](https://arxiv.org/abs/2111.08192)
+> Thi Ngoc Tho Nguyen, Karn N. Watcharasupat, Ngoc Khanh Nguyen, Douglas L. Jones, Woon-Seng Gan. **SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection,** to appear in IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2022. [[**arXiv**]](https://arxiv.org/abs/2110.00275)
+
+> Thi Ngoc Tho Nguyen, Douglas L. Jones, Karn N. Watcharasupat, Huy Phan, Woon-Seng Gan. **SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays,** in Proceedings of the 2022 IEEE International Conference on Acoustics, Speech and Signal Processing, 2022. [[**arXiv**]](https://arxiv.org/abs/2111.08192) [[**IEEE Xplore**]](https://ieeexplore.ieee.org/document/9746132)
 
 ## Introduction to sound event localization and detection
 Sound event localization and detection (SELD) is an emerging research field that unifies the tasks of 

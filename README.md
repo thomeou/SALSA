@@ -122,6 +122,8 @@ For TAU-NIGENS Spatial Sound Events 2021 dataset, please move wav files from sub
 
 ## Feature extraction
 
+> ***Note**: under [contrib](contrib), you can find functionality to run SALSA and SALSA-Lite on the fly (CPU), and for an arbitrary number of microphones. This may be useful if you are interested in more flexible setups (e.g. involving data augmentation and real-time processing).
+
 Our code support the following features:  
 
 | Name        | Format   | Component     | Number of channels |

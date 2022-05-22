@@ -13,7 +13,7 @@ Official implementation for **SALSA: Spatial Cue-Augmented Log-Spectrogram Featu
 
 **Update**: SALSA-Lite feature has been added to the repo.
 
-> Thi Ngoc Tho Nguyen, Karn N. Watcharasupat, Ngoc Khanh Nguyen, Douglas L. Jones, Woon-Seng Gan. **SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection,** to appear in IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2022. [[**arXiv**]](https://arxiv.org/abs/2110.00275)
+> Thi Ngoc Tho Nguyen, Karn N. Watcharasupat, Ngoc Khanh Nguyen, Douglas L. Jones, Woon-Seng Gan. **SALSA: Spatial Cue-Augmented Log-Spectrogram Features for Polyphonic Sound Event Localization and Detection,** IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2022. [[**arXiv**]](https://arxiv.org/abs/2110.00275) [[**IEEE Xplore**]](https://ieeexplore.ieee.org/document/9746132)
 
 > Thi Ngoc Tho Nguyen, Douglas L. Jones, Karn N. Watcharasupat, Huy Phan, Woon-Seng Gan. **SALSA-Lite: A Fast and Effective Feature for Polyphonic Sound Event Localization and Detection with Microphone Arrays,** in Proceedings of the 2022 IEEE International Conference on Acoustics, Speech and Signal Processing, 2022. [[**arXiv**]](https://arxiv.org/abs/2111.08192) [[**IEEE Xplore**]](https://ieeexplore.ieee.org/document/9746132)
 

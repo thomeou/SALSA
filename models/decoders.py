@@ -124,7 +124,7 @@ class SeldDecoder(nn.Module):
 
         if self.decoder_type in ['gru', 'bigru']:
             x, _ = self.gru(x)
-        elif self.decoder_type in ['lsmt', 'bilstm']:
+        elif self.decoder_type in ['lstm', 'bilstm']:
             x, _ = self.lstm(x)
         elif self.decoder_type == 'transformer':
             x = x.transpose(1, 2)  # undo swap: batch size,  n_features, n_timesteps,

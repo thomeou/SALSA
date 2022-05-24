@@ -1,3 +1,7 @@
+**PLEASE ONLY USE ISSUES FOR BUG REPORT, FEATURE REQUEST, AND MAJOR DOCUMENTATION PROBLEMS**
+
+**The Discussion tab has been set up for other questions related to SALSA. Thank you!**
+
 ---
 name: Feature request
 about: Suggest an idea for this project

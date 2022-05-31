@@ -49,7 +49,7 @@ class SeldDecoder(nn.Module):
             self.lstm_size = decoder_size
             self.fc_size = self.lstm_size
 
-            self.lstm = nn.LSTM(input_size=self.lstm_input_size, hidden_size=self.gru_size,
+            self.lstm = nn.LSTM(input_size=self.lstm_input_size, hidden_size=self.lstm_size,
                                 num_layers=2, batch_first=True, bidirectional=False, dropout=0.3)
             init_gru(self.lstm)
         elif self.decoder_type == 'bilstm':
@@ -57,7 +57,7 @@ class SeldDecoder(nn.Module):
             self.lstm_size = decoder_size
             self.fc_size = self.lstm_size * 2
 
-            self.lstm = nn.LSTM(input_size=self.lstm_input_size, hidden_size=self.gru_size,
+            self.lstm = nn.LSTM(input_size=self.lstm_input_size, hidden_size=self.lstm_size,
                                num_layers=2, batch_first=True, bidirectional=True, dropout=0.3)
             init_gru(self.lstm)
         elif self.decoder_type == 'transformer':
